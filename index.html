@@ -1110,7 +1110,8 @@
           </div>
           <div class="quick">
             <span>Freeport, FL</span>
-            <a aria-label="Call Jeremy Helms at 850 499 6229" href="tel:+18504996229">850 499 6229</a>
+            <a aria-label="Phone number hidden, activate to reveal" class="phone" data-p="ODUwNDk5NjIyOQ==" href="#"
+              title="Click to reveal phone number">### ### ####</a>
             <a aria-label="Email Jeremy Helms at digitaljhelms@gmail.com"
               href="mailto:digitaljhelms@gmail.com">digitaljhelms@gmail.com</a>
             <a aria-label="Jeremy Helms LinkedIn profile, opens in a new tab"
@@ -1626,7 +1627,8 @@
           <a aria-label="Email Jeremy Helms at digitaljhelms@gmail.com" class="clink"
             href="mailto:digitaljhelms@gmail.com">digitaljhelms@gmail.com <span aria-hidden="true"
               class="ar">→</span></a>
-          <a aria-label="Call Jeremy Helms at 850 499 6229" class="clink" href="tel:+18504996229">850 499 6229 (CDT)<span
+          <a aria-label="Phone number hidden, activate to reveal" class="clink phone" data-p="ODUwNDk5NjIyOQ=="
+            data-suffix=" (CDT)" href="#" title="Click to reveal phone number">### ### #### (CDT)<span
               aria-hidden="true" class="ar">→</span></a>
           <a aria-label="Jeremy Helms LinkedIn profile, opens in a new tab" class="clink"
             href="https://www.linkedin.com/in/digitaljhelms" rel="noopener noreferrer"
@@ -1662,6 +1664,20 @@
       if (reduceMotion) { el.textContent = word; return; }
       let i = 0; (function type() { if (i <= word.length) { el.textContent = word.slice(0, i++); setTimeout(type, 95); } })();
     })();
+
+    document.querySelectorAll('a.phone').forEach(el => {
+      el.addEventListener('click', (e) => {
+        if (el.dataset.revealed) return;
+        e.preventDefault();
+        const d = atob(el.dataset.p);
+        const n = d.slice(0, 3) + ' ' + d.slice(3, 6) + ' ' + d.slice(6);
+        el.firstChild.textContent = n + (el.dataset.suffix || '');
+        el.href = 'tel:+1' + d;
+        el.setAttribute('aria-label', 'Call Jeremy Helms at ' + n);
+        el.title = 'Call ' + n;
+        el.dataset.revealed = '1';
+      });
+    });
   </script>
 </body>
 
